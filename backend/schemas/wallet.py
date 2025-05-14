@@ -1,6 +1,6 @@
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 
 class OperationRequest(BaseModel):
@@ -10,9 +10,9 @@ class OperationRequest(BaseModel):
 
 
 class WalletResponse(BaseModel):
-    wallet_id: int
-    wallet_uuid: str
+    id: int
+    uuid: str
     balance: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
+

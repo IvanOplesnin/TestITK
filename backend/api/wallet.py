@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from fastapi.params import Depends
 
 from backend.db import get_session
@@ -18,7 +18,7 @@ async def create_operation(
 ):
     new_operation = await update_wallet(
         session=session,
-        wallet_id=wallet_uuid,
+        wallet_uuid=wallet_uuid,
         amount=operation.amount,
         operation_uuid=operation.operation_uuid,
         type_operation=operation.operation_type
@@ -30,5 +30,7 @@ async def create_operation(
 async def get_wallet(wallet_uuid: str, session=Depends(get_session)):
     if wallet_uuid:
         wallet = await get_wallet_by_uuid(session=session, wallet_uuid=wallet_uuid)
-
-    return wallet
+        if wallet:
+            return wallet
+        else:
+            raise HTTPException(status_code=404, detail="Wallet not found")
