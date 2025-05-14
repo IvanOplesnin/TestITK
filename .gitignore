@@ -3,3 +3,5 @@
 .env
 /postgres_db
 .idea
+.coverage
+/htmlcov

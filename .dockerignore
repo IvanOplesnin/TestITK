@@ -1,0 +1,7 @@
+/.idea
+/.venv
+/postgres_db
+.env
+.gitignore
+/htmlcov
+.coverage

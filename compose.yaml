@@ -1,0 +1,27 @@
+services:
+  backend:
+    image: ivanya0956/testitk
+    working_dir: /TestITK
+    ports:
+      - "8000:8000"
+    environment:
+      - PG_LINK=postgresql+asyncpg://postgres:password@database:5432/TestITK
+      - PG_LINK_ALEMBIC=postgresql+psycopg2://postgres:password@database:5432/TestITK
+    depends_on:
+      - database
+
+  database:
+    image: postgres:13.2-alpine
+    working_dir: /database
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=TestITK
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+
+volumes:
+  postgres_data:
