@@ -64,11 +64,10 @@ async def test_idempotent_operation(client):
         "operation_type": "DEPOSIT",
         "amount": 10
     }
-    # первый запрос
+
     r1 = await client.post(f"/api/v1/wallets/{WALLET2}/operation", json=payload)
     assert r1.status_code == status.HTTP_200_OK
 
-    # повторный — уже ошибка
     r2 = await client.post(f"/api/v1/wallets/{WALLET2}/operation", json=payload)
     assert r2.status_code == status.HTTP_400_BAD_REQUEST
     assert "Transaction already exists" in r2.json()["detail"]

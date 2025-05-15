@@ -9,7 +9,7 @@ engine = create_async_engine(pg_link)
 async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
 
-async def get_session():
+async def get_session() -> AsyncSession:
     async with async_session() as session:
         try:
             yield session

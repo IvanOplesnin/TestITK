@@ -9,7 +9,7 @@ from backend.lock_wallet import lock_wallet
 from backend.models.wallet import Wallet, WalletOperation
 
 
-def create_uuid():
+def create_uuid() -> str:
     return str(uuid.uuid4())
 
 

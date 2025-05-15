@@ -9,7 +9,6 @@ from backend.crud import get_wallet_by_uuid, update_wallet, create_wallet
 @pytest.mark.asyncio
 async def test_deposit_and_withdraw(async_session):
     wallet_uuid = await create_wallet(async_session)
-
     assert isinstance(uuid.UUID(wallet_uuid), uuid.UUID)
 
     wallet = await get_wallet_by_uuid(async_session, wallet_uuid)
